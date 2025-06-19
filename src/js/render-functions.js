@@ -3,6 +3,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const listElement = document.querySelector(".gallery");
 const loaderEl = document.querySelector('.display-loader');
+const showButton = document.querySelector('.load-more');
 
 function createGallery(images) {
     const gallery =  images.map(({ 
@@ -18,8 +19,7 @@ function createGallery(images) {
             <a href="${largeImageURL}">
                 <img class="gallery-img" src="${webformatURL}" alt="${tags}"
                 />
-            </a>
-            <div class="notes">
+                <div class="notes">
                 <div class="description">
                     <h2 class="title">Likes</h2>
                     <p class="amount">${likes}</p>
@@ -37,6 +37,8 @@ function createGallery(images) {
                     <p class="amount">${downloads}</p>
                 </div>
             </div>
+            </a>
+            
         </li>`).join("");
 
     listElement.insertAdjacentHTML("beforeend", gallery);
@@ -47,6 +49,8 @@ function createGallery(images) {
         captionDelay: 250,
     });
     lightbox.on('show.simplelightbox');
+
+    lightbox.refresh();
 }
 
 function clearGallery() {
@@ -61,4 +65,12 @@ function hideLoader() {
     loaderEl.classList.add('is-hidden');
 }
 
-export { createGallery, clearGallery, showLoader, hideLoader }
+function showLoadMoreButton() {
+    showButton.classList.remove('is-hidden');
+}
+
+function hideLoadMoreButton(){
+    showButton.classList.add('is-hidden');
+}
+
+export { showButton, createGallery, clearGallery, showLoader, hideLoader, showLoadMoreButton, hideLoadMoreButton }
