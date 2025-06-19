@@ -92,6 +92,7 @@ async function handleClick() {
         const heighElement = document.querySelector(".item").getBoundingClientRect().height;
 
         window.scrollBy({
+            left: 0,
             height: heighElement * 2,
             behavior: 'smooth',
         })
@@ -104,6 +105,3 @@ async function handleClick() {
         hideLoader();
     }
 }
-
-
-
