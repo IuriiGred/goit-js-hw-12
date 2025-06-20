@@ -92,13 +92,13 @@ async function handleClick() {
 
         createGallery(data.hits);
 
-        const cart = document.querySelector(".item")
+        const cart = document.querySelector(".gallery-item")
         const heighElement = cart.getBoundingClientRect().height;
 
         window.scrollBy({
             left: 0,
-            height: heighElement * 2,
-            behavior: 'smooth',
+            top: heighElement * 2,
+            behavior: 'smooth'
         })
         
     }

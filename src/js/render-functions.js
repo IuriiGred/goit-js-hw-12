@@ -15,7 +15,7 @@ function createGallery(images) {
             webformatURL,
             largeImageURL }) => 
             
-        `<li class="item">
+        `<li class="gallery-item">
             <a href="${largeImageURL}">
                 <img class="gallery-img" src="${webformatURL}" alt="${tags}"
                 />
