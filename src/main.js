@@ -13,7 +13,7 @@ let totalPages = 0;
 
 formEl.addEventListener("submit", handleForm);
 
-function handleForm(event) {
+async function handleForm(event) {
     event.preventDefault();
     
     currentPage = 1;
@@ -34,9 +34,10 @@ function handleForm(event) {
             formEl.reset();
             return;
     }
-    
-    getImagesByQuery(query, currentPage, imgOnPage)
-        .then(data => {
+    try{
+
+        const data = await getImagesByQuery(query, currentPage, imgOnPage)
+        
             
             if(data.hits.length === 0){
                 throw new Error(message);
@@ -46,8 +47,9 @@ function handleForm(event) {
             
             createGallery(data.hits);
             showLoadMoreButton();
-        })
-        .catch(error => {
+    }
+        
+    catch(error) {
             iziToast.error({
                 backgroundColor: "#ef4040",
                 timeout: 2000,
@@ -57,11 +59,12 @@ function handleForm(event) {
             
             hideLoadMoreButton()
             formEl.reset();
-        })
-        .finally(() => {
+        }
+
+    finally{
             hideLoader();
             formEl.reset();
-        })
+        }
 }
 
 showButton.addEventListener('click', handleClick);
@@ -89,7 +92,8 @@ async function handleClick() {
 
         createGallery(data.hits);
 
-        const heighElement = document.querySelector(".item").getBoundingClientRect().height;
+        const cart = document.querySelector(".item")
+        const heighElement = cart.getBoundingClientRect().height;
 
         window.scrollBy({
             left: 0,
