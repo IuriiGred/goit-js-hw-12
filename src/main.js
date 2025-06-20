@@ -102,6 +102,8 @@ async function handleClick() {
 
         createGallery(data.hits);
 
+        // const height = resultRef.firstChild.getBoundingClientRect().height;
+
         const cart = document.querySelector(".gallery-item")
         const heighElement = cart.getBoundingClientRect().height;
 
