@@ -6,7 +6,7 @@ import { createGallery, clearGallery, showLoader, hideLoader, showLoadMoreButton
 
 const formEl = document.querySelector(".form");
 
-let imgOnPage = 150;
+let imgOnPage = 15;
 let currentPage = 1;
 let query = "";
 let totalPages = 0;
