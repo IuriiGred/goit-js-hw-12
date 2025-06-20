@@ -6,7 +6,7 @@ import { createGallery, clearGallery, showLoader, hideLoader, showLoadMoreButton
 
 const formEl = document.querySelector(".form");
 
-let imgOnPage = 15;
+let imgOnPage = 150;
 let currentPage = 1;
 let query = "";
 let totalPages = 0;
@@ -35,18 +35,28 @@ async function handleForm(event) {
             return;
     }
     try{
-
-        const data = await getImagesByQuery(query, currentPage, imgOnPage)
-        
+        const data = await getImagesByQuery(query, currentPage, imgOnPage);
             
-            if(data.hits.length === 0){
-                throw new Error(message);
-            }
+        if(data.hits.length === 0){
+            throw new Error(message);
+        }
 
-            totalPages = Math.ceil(data.totalHits / imgOnPage);
+        totalPages = Math.ceil(data.totalHits / imgOnPage);
+
+        if(currentPage === totalPages){
+            iziToast.info({
+                backgroundColor: "#ef4040",
+                timeout: 2000,
+                position: "topRight",
+                message: "There's only one part in this query.",
+            });
             
+            hideLoadMoreButton();
+            createGallery(data.hits);
+        } else {
             createGallery(data.hits);
             showLoadMoreButton();
+        }        
     }
         
     catch(error) {
@@ -96,14 +106,19 @@ async function handleClick() {
         const heighElement = cart.getBoundingClientRect().height;
 
         window.scrollBy({
-            left: 0,
             top: heighElement * 2,
             behavior: 'smooth'
         })
         
     }
     catch(error) {
-        alert(error.message)
+        iziToast.error({
+            backgroundColor: "#ef4040",
+            timeout: 2000,
+            position: "topRight",
+            message: error.message,
+        });
+            
     }
     finally{
         hideLoader();
