@@ -6,7 +6,7 @@ import { createGallery, clearGallery, showLoader, hideLoader, showLoadMoreButton
 
 const formEl = document.querySelector(".form");
 
-let imgOnPage = 150;
+let imgOnPage = 15;
 let currentPage = 1;
 let query = "";
 let totalPages = 0;
@@ -45,7 +45,7 @@ async function handleForm(event) {
 
         if(currentPage === totalPages){
             iziToast.info({
-                backgroundColor: "#ef4040",
+                backgroundColor: "#41bbbb",
                 timeout: 2000,
                 position: "topRight",
                 message: "There's only one part in this query.",
@@ -86,8 +86,8 @@ async function handleClick() {
 
     try {
         if(currentPage > totalPages){
-            iziToast.error({
-                backgroundColor: "#ef4040",
+            iziToast.info({
+                backgroundColor: "#41bbbb",
                 timeout: 2000,
                 position: "topRight",
                 message: "We're sorry, but you've reached the end of search results.",
@@ -108,18 +108,18 @@ async function handleClick() {
         window.scrollBy({
             top: heighElement * 2,
             behavior: 'smooth'
-        })
-        
+        })        
     }
+
     catch(error) {
         iziToast.error({
             backgroundColor: "#ef4040",
             timeout: 2000,
             position: "topRight",
             message: error.message,
-        });
-            
+        });            
     }
+
     finally{
         hideLoader();
     }
