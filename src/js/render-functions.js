@@ -73,4 +73,4 @@ function hideLoadMoreButton(){
     showButton.classList.add('is-hidden');
 }
 
-export { showButton, createGallery, clearGallery, showLoader, hideLoader, showLoadMoreButton, hideLoadMoreButton }
+export { listElement, showButton, createGallery, clearGallery, showLoader, hideLoader, showLoadMoreButton, hideLoadMoreButton }

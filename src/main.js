@@ -2,7 +2,7 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 import { getImagesByQuery } from "./js/pixabay-api"
-import { createGallery, clearGallery, showLoader, hideLoader, showLoadMoreButton, hideLoadMoreButton, showButton } from "./js/render-functions";
+import { createGallery, clearGallery, showLoader, hideLoader, showLoadMoreButton, hideLoadMoreButton, showButton, listElement } from "./js/render-functions";
 
 const formEl = document.querySelector(".form");
 
@@ -102,10 +102,7 @@ async function handleClick() {
 
         createGallery(data.hits);
 
-        // const height = resultRef.firstChild.getBoundingClientRect().height;
-
-        const cart = document.querySelector(".gallery-item")
-        const heighElement = cart.getBoundingClientRect().height;
+        const heighElement = listElement.firstChild.getBoundingClientRect().height;
 
         window.scrollBy({
             top: heighElement * 2,
