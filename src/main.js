@@ -60,21 +60,20 @@ async function handleForm(event) {
     }
         
     catch(error) {
-            iziToast.error({
-                backgroundColor: "#ef4040",
-                timeout: 2000,
-                position: "topRight",
-                message: "Sorry, there are no images matching your search query. Please try again!",
-            });
-            
-            hideLoadMoreButton()
-            formEl.reset();
-        }
+        iziToast.error({
+            backgroundColor: "#ef4040",
+            timeout: 2000,
+            position: "topRight",
+            message: "Sorry, there are no images matching your search query. Please try again!",
+        });
+        
+        hideLoadMoreButton()
+    }
 
     finally{
-            hideLoader();
-            formEl.reset();
-        }
+        hideLoader();
+        formEl.reset();
+    }
 }
 
 showButton.addEventListener('click', handleClick);
@@ -85,22 +84,21 @@ async function handleClick() {
     showLoader();
 
     try {
-        if(currentPage > totalPages){
+        const data = await getImagesByQuery(query, currentPage, imgOnPage);
+        
+        createGallery(data.hits);
+
+        if(currentPage >= totalPages){            
             iziToast.info({
                 backgroundColor: "#41bbbb",
                 timeout: 2000,
                 position: "topRight",
                 message: "We're sorry, but you've reached the end of search results.",
             });
-            
-            hideLoadMoreButton();
             return;
         }
+        
         showLoadMoreButton();
-
-        const data = await getImagesByQuery(query, currentPage, imgOnPage);
-
-        createGallery(data.hits);
 
         const heighElement = listElement.firstChild.getBoundingClientRect().height;
 
